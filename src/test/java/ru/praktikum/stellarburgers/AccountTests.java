@@ -5,8 +5,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
+import ru.praktikum.stellarburgers.client.UserClient;
 import ru.praktikum.stellarburgers.pom.AccountPage;
 import ru.praktikum.stellarburgers.pom.ConstructorPage;
+import ru.praktikum.stellarburgers.pom.CreateUser;
 import ru.praktikum.stellarburgers.pom.LoginPage;
 
 import static ru.praktikum.stellarburgers.driver.WebDriverCreator.createDriver;
@@ -16,14 +18,16 @@ public class AccountTests {
     private WebDriver driver;
     private LoginPage loginPage;
     private AccountPage accountPage;
+    private CreateUser user;
 
     @BeforeEach
     public void setUp() {
-        driver = createDriver("chrome");
+        driver = createDriver();
         loginPage = new LoginPage(driver);
         accountPage = new AccountPage(driver);
+        user = UserClient.createUserApi();
         loginPage.openLoginPage()
-                        .fillLoginForm("Mouse123@local.net", "Mouse172839");
+                        .fillLoginForm(user.getEmail(), user.getPassword());
     }
 
     @Test
@@ -66,5 +70,6 @@ public class AccountTests {
         if (driver != null) {
             driver.quit();
         }
+        UserClient.deleteUserApi(user);
     }
 }

@@ -20,8 +20,7 @@ public class RegisterTests {
 
     @BeforeEach
     public void setUp() {
-//        driver = new ChromeDriver();
-        driver = createDriver("chrome");
+        driver = createDriver();
         constructorPage = new ConstructorPage(driver);
         registerPage = new RegisterPage(driver);
         loginPage = new LoginPage(driver);

@@ -20,7 +20,7 @@ public class ConstructorTests {
 
     @BeforeEach
     public void setUp() {
-        driver = createDriver("chrome");
+        driver = createDriver();
         constructorPage = new ConstructorPage(driver);
         constructorPage.openMainPage();
     }
